@@ -8,6 +8,7 @@ namespace channels\facebook\services;
 
 use channels\common\payloads\ChannelCreatePayload;
 use channels\common\services\ChannelCreateService;
+use common\services\Log;
 use Exception;
 
 class FacebookCreateService extends ChannelCreateService
@@ -25,7 +26,11 @@ class FacebookCreateService extends ChannelCreateService
 
         /**  */
 
-        return $this->save();
+        $this->save();
+
+        $this->log();
+
+        return [/**  */];
     }
 
     /**
@@ -39,6 +44,13 @@ class FacebookCreateService extends ChannelCreateService
         if(!empty($channel)) {
             throw new Exception('Канал уже создан', 403);
         }
+    }
+
+    /**
+     *
+     */
+    private function log(){
+        Log::log('Канал создан');
     }
 
     /**
